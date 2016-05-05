@@ -80,6 +80,21 @@ namespace System.IO.Compression.Tests
         }
 
         [Fact]
+        public void ExtractToDirectoryTestOverwrite()
+        {
+            TestExtract(zfile("normal.zip"), zfolder("normal"));
+
+            //Removed empty extract since this will fail the assertion
+            //TestExtract(zfile("empty.zip"), zfolder("empty"));
+
+            TestExtract(zfile("explicitdir1.zip"), zfolder("explicitdir"));
+            TestExtract(zfile("explicitdir2.zip"), zfolder("explicitdir"));
+            TestExtract(zfile("appended.zip"), zfolder("small"));
+            TestExtract(zfile("prepended.zip"), zfolder("small"));
+            TestExtract(zfile("noexplicitdir.zip"), zfolder("explicitdir"));
+        }
+
+        [Fact]
         [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)] // Jenkins fails with unicode characters [JENKINS-12610]
         public void ExtractToDirectoryUnicode()
         {
@@ -92,6 +107,20 @@ namespace System.IO.Compression.Tests
             ZipFile.ExtractToDirectory(zipFileName, tempFolder);
             DirsEqual(tempFolder, folderName);
 
+            Assert.Throws<ArgumentNullException>(() => ZipFile.ExtractToDirectory(null, tempFolder));
+        }
+
+        private void TestExtractWithOverwrite(string zipFileName, string folderName)
+        {
+            string tempFolder = GetTmpDirPath(true);
+            ZipFile.ExtractToDirectory(zipFileName, tempFolder);
+            DirsEqual(tempFolder, folderName);
+
+            Assert.Throws<IOException>(() => ZipFile.ExtractToDirectory(zipFileName, tempFolder));
+
+            ZipFile.ExtractToDirectory(zipFileName, tempFolder, overwrite: true);
+            DirsEqual(tempFolder, folderName);
+            
             Assert.Throws<ArgumentNullException>(() => ZipFile.ExtractToDirectory(null, tempFolder));
         }
 
@@ -166,6 +195,24 @@ namespace System.IO.Compression.Tests
                 Assert.Throws<ArgumentNullException>(() => ((ZipArchive)null).ExtractToDirectory(tempFolder));
                 Assert.Throws<ArgumentNullException>(() => archive.ExtractToDirectory(null));
                 archive.ExtractToDirectory(tempFolder);
+
+                DirsEqual(tempFolder, zfolder("normal"));
+            }
+        }
+
+        [Fact]
+        public void ExtractToDirectoryTest_Overwrite()
+        {
+            using (ZipArchive archive = ZipFile.Open(zfile("normal.zip"), ZipArchiveMode.Read))
+            {
+                string tempFolder = GetTmpDirPath(false);
+                archive.ExtractToDirectory(tempFolder);
+
+                DirsEqual(tempFolder, zfolder("normal"));
+
+                Assert.Throws<IOException>(() => archive.ExtractToDirectory(tempFolder));
+
+                archive.ExtractToDirectory(tempFolder, overwrite: true);
 
                 DirsEqual(tempFolder, zfolder("normal"));
             }

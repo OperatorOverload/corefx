@@ -121,7 +121,8 @@ namespace System.IO.Compression
         /// <param name="destinationDirectoryName">The path to the directory on the file system.
         /// The directory specified must not exist. The path is permitted to specify relative or absolute path information.
         /// Relative path information is interpreted as relative to the current working directory.</param>
-        public static void ExtractToDirectory(this ZipArchive source, String destinationDirectoryName)
+        /// <param name="overwrite">True to indicate overwrite.</param>
+        public static void ExtractToDirectory(this ZipArchive source, String destinationDirectoryName, Boolean overwrite=false)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -158,7 +159,7 @@ namespace System.IO.Compression
                     // If it is a file:
                     // Create containing directory:
                     Directory.CreateDirectory(Path.GetDirectoryName(fileDestinationPath));
-                    entry.ExtractToFile(fileDestinationPath, overwrite: false);
+                    entry.ExtractToFile(fileDestinationPath, overwrite: overwrite);
                 }
             }
         }
