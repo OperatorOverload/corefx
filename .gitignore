@@ -258,3 +258,4 @@ Temporary Items
 Session.vim
 .netrwhist
 *~
+/buildwin.cmd
