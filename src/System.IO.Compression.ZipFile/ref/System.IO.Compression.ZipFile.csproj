@@ -5,7 +5,7 @@
     <UseECMAKey Condition="'$(UseECMAKey)' == ''">true</UseECMAKey>
     <OutputType>Library</OutputType>
     <NuGetTargetMoniker Condition="'$(TargetGroup)' == ''">.NETCoreApp,Version=v1.1</NuGetTargetMoniker>
-    <NuGetTargetMoniker>.NETStandard,Version=v1.7</NuGetTargetMoniker>
+    <NuGetTargetMoniker>.NETStandard,Version=v1.3</NuGetTargetMoniker>
     <DefineConstants Condition="'$(TargetGroup)' == ''">$(DefineConstants);netcoreapp11</DefineConstants>
   </PropertyGroup>
   <ItemGroup>

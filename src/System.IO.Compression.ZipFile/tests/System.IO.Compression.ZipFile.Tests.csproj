@@ -8,6 +8,7 @@
     <OutputType>Library</OutputType>
     <AssemblyName>System.IO.Compression.ZipFile.Tests</AssemblyName>
     <NugetTargetMoniker Condition="'$(TargetGroup)' == ''">.NETCoreApp,Version=v1.1</NugetTargetMoniker>
+    <Preserve>true</Preserve>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'" />
