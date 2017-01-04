@@ -6,6 +6,9 @@
     "System.Text.Encoding": "4.3.0"
   },
   "frameworks": {
-    "netstandard1.3": {}
+    "netstandard1.7": {},
+    "netcoreapp2.0": {},
+    "uap10.1": {},
+    "net463": {},
   }
 }
