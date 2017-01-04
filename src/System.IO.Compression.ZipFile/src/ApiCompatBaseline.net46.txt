@@ -1,0 +1,3 @@
+MembersMustExist : Member 'System.IO.Compression.ZipFile.ExtractToDirectory(System.String, System.String, System.Boolean)' does not exist in the implementation but it does exist in the contract.
+MembersMustExist : Member 'System.IO.Compression.ZipFile.ExtractToDirectory(System.String, System.String, System.Text.Encoding, System.Boolean)' does not exist in the implementation but it does exist in the contract.
+MembersMustExist : Member 'System.IO.Compression.ZipFileExtensions.ExtractToDirectory(System.IO.Compression.ZipArchive, System.String, System.Boolean)' does not exist in the implementation but it does exist in the contract.
